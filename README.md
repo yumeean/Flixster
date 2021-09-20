@@ -24,10 +24,12 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### App Walkthough GIF
 
-<img src="walkthrough.gif" width=250><br>
+<img src='walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ### Notes
-Describe any challenges encountered while building the app.
+It was challenging finding the right network/speed setting to see if placeholder works.
 
 ### Open-source libraries used
 
