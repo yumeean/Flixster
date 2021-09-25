@@ -1,18 +1,21 @@
 package com.example.flixster.adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
+import androidx.core.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -87,15 +90,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 imageUrl = movie.getPosterPath();
             }
             int radius = 30;
-            int margin = 100;
-            Glide.with(context).load(imageUrl).centerCrop().transform(new RoundedCornersTransformation(radius, margin)).placeholder(R.drawable.ic_placeholder).into(ivPoster);
+            int margin = 10;
+            Glide.with(context).load(imageUrl).circleCrop().transform(new RoundedCornersTransformation(radius, margin)).placeholder(R.drawable.ic_placeholder).into(ivPoster);
             container.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(context, DetailActivity.class);
                     i.putExtra("title", movie.getTitle());
                     i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+                    Pair<View, String> p1 = Pair.create((View)tvTitle, "title");
+                    Pair<View, String> p2 = Pair.create((View)tvOverview, "overview");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, p1, p2);
+                    context.startActivity(i, options.toBundle());
                 }
             });
 
